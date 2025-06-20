@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Notes Portal</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f7fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #0077cc;
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      background: #0077cc;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    main {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .homepage-image {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .homepage-image img {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    section#home {
+      margin-bottom: 50px;
+    }
+    section#home h2 {
+      font-size: 2rem;
+      color: #0077cc;
+      border-bottom: 3px solid #0077cc;
+      padding-bottom: 10px;
+    }
+    .notes-list {
+      list-style: none;
+      padding: 0;
+    }
+    .notes-list li {
+      background: #ffffff;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      padding: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .notes-list li h3 {
+      margin: 0;
+      color: #0077cc;
+      font-size: 1.2rem;
+    }
+    .notes-list li .date {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .notes-list li a {
+      color: #0077cc;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    #adminSection {
+      display: none;
+      margin-top: 30px;
+    }
+    .upload-btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .upload-btns input[type="file"] {
+      padding: 5px;
+      font-size: 16px;
+    }
+    #passwordModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 400px;
+      text-align: center;
+    }
+    .modal-content input {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px 0;
+      width: 80%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .modal-content button {
+      padding: 10px 15px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .modal-content button:hover {
+      background: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Class Notes Portal</h1>
+    <div class="nav-buttons">
+      <button id="homeBtn">Home</button>
+      <button id="adminBtn">Admin</button>
+    </div>
+  </header>  <main>
+    <div class="homepage-image">
+      <img src="/mnt/data/A_flat-style_digital_illustration_displays_the_Git.png" alt="Class Notes Portal Homepage">
+    </div><section id="home">
+  <h2>Recent Notes</h2>
+  <ul class="notes-list" id="notesList"></ul>
+</section>
+
+<section id="adminSection">
+  <h2>Upload New Notes</h2>
+  <div class="upload-btns">
+    <input type="file" id="fileInput" />
+    <button id="uploadBtn">Upload</button>
+  </div>
+</section>
+
+  </main>  <div id="passwordModal">
+    <div class="modal-content">
+      <h3>Admin Login</h3>
+      <input type="password" id="adminPassword" placeholder="Enter password" />
+      <button id="submitPasswordBtn">Submit</button>
+    </div>
+  </div>  <script>
+    const password = 'Dilshan@5964';
+    const homeBtn = document.getElementById('homeBtn');
+    const adminBtn = document.getElementById('adminBtn');
+    const adminSection = document.getElementById('adminSection');
+    const passwordModal = document.getElementById('passwordModal');
+    const submitPasswordBtn = document.getElementById('submitPasswordBtn');
+    const adminPassword = document.getElementById('adminPassword');
+    const notesList = document.getElementById('notesList');
+    const fileInput = document.getElementById('fileInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+
+    homeBtn.addEventListener('click', () => {
+      adminSection.style.display = 'none';
+      loadNotes();
+    });
+
+    adminBtn.addEventListener('click', () => {
+      passwordModal.style.display = 'flex';
+    });
+
+    submitPasswordBtn.addEventListener('click', () => {
+      if (adminPassword.value === password) {
+        passwordModal.style.display = 'none';
+        adminSection.style.display = 'block';
+      } else {
+        alert('Incorrect password!');
+      }
+    });
+
+    uploadBtn.addEventListener('click', () => {
+      const file = fileInput.files[0];
+      if (!file) return alert('Please select a file');
+      const url = URL.createObjectURL(file);
+      saveNotes(file.name, url);
+      loadNotes();
+    });
+
+    function saveNotes(name, url) {
+      const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+      storedNotes.push({ name, date: new Date().toLocaleDateString(), url });
+      localStorage.setItem('notes', JSON.stringify(storedNotes));
+    }
+
+    function loadNotes() {
+      notesList.innerHTML = '';
+      const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+      storedNotes.forEach(note => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          <h3>${note.name}</h3>
+          <p class="date">${note.date}</p>
+          <a href="${note.url}" download>Download</a>
+        `;
+        notesList.appendChild(listItem);
+      });
+    }
+
+    loadNotes();
+  </script></body>
+</html>
