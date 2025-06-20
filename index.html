@@ -1,234 +1,223 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class Notes Portal</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #f4f7fa;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background: #0077cc;
-      padding: 20px;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 {
-      margin: 0;
-    }
-    .nav-buttons {
-      display: flex;
-      gap: 10px;
-    }
-    button {
-      background: #0077cc;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background: #005fa3;
-    }
-    main {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-    .homepage-image {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .homepage-image img {
-      width: 100%;
-      max-width: 800px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    section#home {
-      margin-bottom: 50px;
-    }
-    section#home h2 {
-      font-size: 2rem;
-      color: #0077cc;
-      border-bottom: 3px solid #0077cc;
-      padding-bottom: 10px;
-    }
-    .notes-list {
-      list-style: none;
-      padding: 0;
-    }
-    .notes-list li {
-      background: #ffffff;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      padding: 15px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    .notes-list li h3 {
-      margin: 0;
-      color: #0077cc;
-      font-size: 1.2rem;
-    }
-    .notes-list li .date {
-      font-size: 0.9rem;
-      color: #888;
-      margin-bottom: 10px;
-    }
-    .notes-list li a {
-      color: #0077cc;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-    #adminSection {
-      display: none;
-      margin-top: 30px;
-    }
-    .upload-btns {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .upload-btns input[type="file"] {
-      padding: 5px;
-      font-size: 16px;
-    }
-    #passwordModal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      width: 400px;
-      text-align: center;
-    }
-    .modal-content input {
-      padding: 10px;
-      font-size: 16px;
-      margin: 10px 0;
-      width: 80%;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .modal-content button {
-      padding: 10px 15px;
-      background: #0077cc;
-      color: white;
-      border: none;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .modal-content button:hover {
-      background: #005fa3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher's Corner 🌟</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffd700, #ffb6c1);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            background: #ff6b6b;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+        }
+
+        /* Content Area */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* File List Styling */
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-item {
+            background: #fff3e0;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .file-item:hover {
+            transform: translateX(10px);
+        }
+
+        .file-date {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Admin Modal */
+        #adminModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        /* Upload Form */
+        #uploadForm {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .upload-box {
+            border: 2px dashed #4CAF50;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .upload-box:hover {
+            border-color: #45a049;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .nav-bar {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Class Notes Portal</h1>
-    <div class="nav-buttons">
-      <button id="homeBtn">Home</button>
-      <button id="adminBtn">Admin</button>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <button class="nav-button" onclick="showHome()">Home 🏠</button>
+        <button class="nav-button" onclick="showAdmin()">Admin 🔒</button>
     </div>
-  </header>  <main>
-    <div class="homepage-image">
-      <img src="/mnt/data/A_flat-style_digital_illustration_displays_the_Git.png" alt="Class Notes Portal Homepage">
-    </div><section id="home">
-  <h2>Recent Notes</h2>
-  <ul class="notes-list" id="notesList"></ul>
-</section>
 
-<section id="adminSection">
-  <h2>Upload New Notes</h2>
-  <div class="upload-btns">
-    <input type="file" id="fileInput" />
-    <button id="uploadBtn">Upload</button>
-  </div>
-</section>
-
-  </main>  <div id="passwordModal">
-    <div class="modal-content">
-      <h3>Admin Login</h3>
-      <input type="password" id="adminPassword" placeholder="Enter password" />
-      <button id="submitPasswordBtn">Submit</button>
+    <!-- Main Content -->
+    <div class="content" id="homeContent">
+        <h1>Welcome to Teacher Dilshan's Classroom! 🎉</h1>
+        <ul class="file-list" id="fileList">
+            <!-- Files will appear here dynamically -->
+        </ul>
     </div>
-  </div>  <script>
-    const password = 'Dilshan@5964';
-    const homeBtn = document.getElementById('homeBtn');
-    const adminBtn = document.getElementById('adminBtn');
-    const adminSection = document.getElementById('adminSection');
-    const passwordModal = document.getElementById('passwordModal');
-    const submitPasswordBtn = document.getElementById('submitPasswordBtn');
-    const adminPassword = document.getElementById('adminPassword');
-    const notesList = document.getElementById('notesList');
-    const fileInput = document.getElementById('fileInput');
-    const uploadBtn = document.getElementById('uploadBtn');
 
-    homeBtn.addEventListener('click', () => {
-      adminSection.style.display = 'none';
-      loadNotes();
-    });
+    <!-- Admin Modal -->
+    <div id="adminModal">
+        <h2>Admin Access 🔑</h2>
+        <input type="password" id="adminPassword" placeholder="Enter password" class="nav-button">
+        <button class="nav-button" onclick="checkPassword()">Submit</button>
+    </div>
 
-    adminBtn.addEventListener('click', () => {
-      passwordModal.style.display = 'flex';
-    });
+    <!-- Upload Form -->
+    <div id="uploadForm" class="content">
+        <h2>Upload New File 📤</h2>
+        <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+            Click here or drop files<br>
+            <small>Accepted formats: PDF, DOCX, PNG</small>
+        </div>
+        <input type="file" id="fileInput" style="display: none;" onchange="handleFileUpload()">
+    </div>
 
-    submitPasswordBtn.addEventListener('click', () => {
-      if (adminPassword.value === password) {
-        passwordModal.style.display = 'none';
-        adminSection.style.display = 'block';
-      } else {
-        alert('Incorrect password!');
-      }
-    });
+    <script>
+        // Password Protection
+        const ADMIN_PASSWORD = "Dilshan@5964";
 
-    uploadBtn.addEventListener('click', () => {
-      const file = fileInput.files[0];
-      if (!file) return alert('Please select a file');
-      const url = URL.createObjectURL(file);
-      saveNotes(file.name, url);
-      loadNotes();
-    });
+        function showAdmin() {
+            document.getElementById('adminModal').style.display = 'block';
+        }
 
-    function saveNotes(name, url) {
-      const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
-      storedNotes.push({ name, date: new Date().toLocaleDateString(), url });
-      localStorage.setItem('notes', JSON.stringify(storedNotes));
-    }
+        function checkPassword() {
+            const enteredPassword = document.getElementById('adminPassword').value;
+            if (enteredPassword === ADMIN_PASSWORD) {
+                document.getElementById('adminModal').style.display = 'none';
+                document.getElementById('uploadForm').style.display = 'block';
+                document.getElementById('homeContent').style.display = 'none';
+            } else {
+                alert('Incorrect password! Try again.');
+            }
+        }
 
-    function loadNotes() {
-      notesList.innerHTML = '';
-      const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
-      storedNotes.forEach(note => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-          <h3>${note.name}</h3>
-          <p class="date">${note.date}</p>
-          <a href="${note.url}" download>Download</a>
-        `;
-        notesList.appendChild(listItem);
-      });
-    }
+        // File Upload Handling
+        function handleFileUpload() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                const fileName = file.name;
+                const uploadDate = new Date().toLocaleDateString();
+                
+                // Save to localStorage
+                const existingFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+                existingFiles.push({name: fileName, date: uploadDate});
+                localStorage.setItem('uploadedFiles', JSON.stringify(existingFiles));
+                
+                // Show confirmation
+                alert('File uploaded successfully!');
+                showHome();
+            }
+        }
 
-    loadNotes();
-  </script></body>
+        // Display Files
+        function showHome() {
+            document.getElementById('homeContent').style.display = 'block';
+            document.getElementById('uploadForm').style.display = 'none';
+            
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+            
+            const files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+            
+            files.forEach(file => {
+                const listItem = document.createElement('li');
+                listItem.className = 'file-item';
+                listItem.innerHTML = `
+                    ${file.name} 
+                    <span class="file-date">Uploaded: ${file.date}</span>
+                `;
+                fileList.appendChild(listItem);
+            });
+        }
+
+        // Initialize
+        showHome();
+    </script>
+</body>
 </html>
